@@ -6,7 +6,7 @@ dotenv.config()
 
 const PORT = process.env.PORT || 8000
 
-const server = http.createServer((req, res) => {
+export const server = http.createServer((req, res) => {
 	switch (req.method) {
 		case 'GET':
 			getReq(req, res, users)

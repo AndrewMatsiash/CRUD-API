@@ -1,0 +1,17 @@
+{
+  "extensionsToTreatAsEsm": [".ts"],
+  "moduleFileExtensions": ["js", "ts"],
+  "preset": "ts-jest",
+  "testEnvironment": "node",
+  "globals": {
+    "ts-jest": {
+      "useESM": true
+    }
+  },
+  "transformIgnorePatterns": ["node_modules/(?!(string-width|strip-ansi|ansi-regex|test-json-import)/)"],
+  "moduleNameMapper": {
+    "^(\\.{1,2}/.*)\\.js$": "$1"
+  },
+  "moduleDirectories": ["node_modules", "src"],
+  "modulePaths": ["node_modules", "<rootDir>/src"]
+}
