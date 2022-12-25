@@ -1,7 +1,6 @@
 import request from "supertest";
 import { server } from "../main.js";
-import { users } from "../data/users.js";
-import { v4 as uuid4 } from 'uuid';
+
 
 
 afterAll(() => {
@@ -46,7 +45,7 @@ describe('REST api TEST', () => {
 		await request(server).get('/api/users').expect(200, [body])
 	})
 
-	it('should return a 200 status code and the data when the url is api/users/id', async () => {
+	it('should return a 200 status code and the data when the url is api/users/id method GET', async () => {
 		const { body } = await request(server).get(`/api/users/${user.id}`).expect(200)
 		expect(body).toEqual(
 			{
@@ -58,4 +57,9 @@ describe('REST api TEST', () => {
 		)
 
 	})
+
+	it('should return a 200 status code and the data when the url is api/users/id method DELETE', async () => {
+		await request(server).delete(`/api/users/${user.id}`).expect(200)
+	})
+
 });
