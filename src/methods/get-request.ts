@@ -16,28 +16,22 @@ export const getReq = (
 		res.statusCode = 200;
 		res.setHeader('Content-Type', 'application/json');
 		res.end(JSON.stringify(data));
-		return
-	} else if (req.url !== '/api/users') {
-		res.writeHead(404, { 'Content-Type': 'application/json' });
-		res.end(JSON.stringify({ title: 'Not Found', message: 'Route not found' }));
-		return
-	}
-
-	if (!regexV4.test(id)) {
+		return;
+	} else if (id !== '' && !regexV4.test(id)) {
 		res.writeHead(404, { 'Content-Type': 'application/json' });
 		res.end(JSON.stringify({ title: 'Validation failed', message: 'UUID is not valid' }));
-		return
-	}
-
-	if (baseUrl === '/api/users/' && regexV4.test(id)) {
+	} else if (baseUrl === '/api/users/' && regexV4.test(id)) {
 		res.setHeader('Content-Type', 'application/json');
-		const filterUserById = data.filter((el) => el.id === id);
-		if (filterUserById.length > 0) {
+		const findUserById = data.find((el) => el.id === id);
+		if (findUserById) {
 			res.statusCode = 200;
-			res.end(JSON.stringify(filterUserById));
+			res.end(JSON.stringify(findUserById));
 		} else {
 			res.statusCode = 404;
 			res.end(JSON.stringify({ title: 'Not Found', message: 'user not found' }));
 		}
+	} else {
+		res.writeHead(404, { 'Content-Type': 'application/json' });
+		res.end(JSON.stringify({ title: 'Not Found', message: 'Route not found' }));
 	}
 };
