@@ -14,7 +14,7 @@ export const putReq = async (
 	const regexV4 = new RegExp(/^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i);
 
 	if (id !== '' && !regexV4.test(id)) {
-		res.writeHead(404, { 'Content-Type': 'application/json' });
+		res.writeHead(400, { 'Content-Type': 'application/json' });
 		res.end(JSON.stringify({ title: 'Validation failed', message: 'UUID is not valid' }));
 	} else if (baseUrl === '/api/users/' && regexV4.test(id)) {
 		res.setHeader('Content-Type', 'application/json');

@@ -27,7 +27,7 @@ describe('REST api TESTS', () => {
 		const { body } = await request(server).post('/api/users').send({
 			username: "Andrei",
 			age: 28,
-			hobbes: [''],
+			hobbies: [''],
 		},).expect(201)
 
 		user = body
@@ -37,7 +37,7 @@ describe('REST api TESTS', () => {
 				id: expect.any(String),
 				username: "Andrei",
 				age: 28,
-				hobbes: [''],
+				hobbies: [''],
 			}
 		)
 
@@ -51,14 +51,14 @@ describe('REST api TESTS', () => {
 				id: user.id,
 				username: "Andrei",
 				age: 28,
-				hobbes: [''],
+				hobbies: [''],
 			}
 		)
 
 	})
 
 	it('should return a 200 status code and the data when the url is api/users/id method DELETE', async () => {
-		await request(server).delete(`/api/users/${user.id}`).expect(200)
+		await request(server).delete(`/api/users/${user.id}`).expect(204)
 	})
 
 	it('should return a 200 status code and the data when the url is api/users/id method PUT', async () => {

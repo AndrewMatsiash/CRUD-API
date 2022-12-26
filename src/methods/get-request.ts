@@ -18,7 +18,7 @@ export const getReq = (
 		res.end(JSON.stringify(data));
 		return;
 	} else if (id !== '' && !regexV4.test(id)) {
-		res.writeHead(404, { 'Content-Type': 'application/json' });
+		res.writeHead(400, { 'Content-Type': 'application/json' });
 		res.end(JSON.stringify({ title: 'Validation failed', message: 'UUID is not valid' }));
 	} else if (baseUrl === '/api/users/' && regexV4.test(id)) {
 		res.setHeader('Content-Type', 'application/json');
