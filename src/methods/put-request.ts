@@ -19,12 +19,13 @@ export const putReq = async (
 	} else if (baseUrl === '/api/users/' && regexV4.test(id)) {
 		res.setHeader('Content-Type', 'application/json');
 		const userIndex = data.findIndex((el) => el.id === id);
-		if (userIndex) {
+		if (userIndex !== -1) {
 			try {
 				const body = await requestBodyParser(req);
-				data[userIndex] = { ...body, id };
+				const updateObj = { ...body, id }
+				data[userIndex] = updateObj;
 				res.statusCode = 200;
-				res.end(JSON.stringify(data));
+				res.end(JSON.stringify(updateObj));
 			} catch (error) { }
 		} else {
 			res.statusCode = 404;

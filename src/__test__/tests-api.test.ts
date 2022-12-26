@@ -7,14 +7,13 @@ afterAll(() => {
 	server.close()
 })
 
-describe('REST api TEST', () => {
-	it('should return a 200 status code and the data when the url is /api/users', async () => {
+describe('REST api TESTS', () => {
+	it('should return a 200 status code and the data when the url is /api/users and method GET', async () => {
 		await request(server).get('/api/users').expect(200, [])
 	});
 
 
-
-	it('should return a 404 status code and an error message when the url is not /api/user', async () => {
+	it('should return a 404 status code and an error message when the url is not /api/users and method GET', async () => {
 		await request(server).get('/api/dfdfdfdf').expect(404, { title: 'Not Found', message: 'Route not found' })
 	});
 
@@ -49,7 +48,7 @@ describe('REST api TEST', () => {
 		const { body } = await request(server).get(`/api/users/${user.id}`).expect(200)
 		expect(body).toEqual(
 			{
-				id: expect.any(String),
+				id: user.id,
 				username: "Andrei",
 				age: 28,
 				hobbes: [''],
@@ -60,6 +59,19 @@ describe('REST api TEST', () => {
 
 	it('should return a 200 status code and the data when the url is api/users/id method DELETE', async () => {
 		await request(server).delete(`/api/users/${user.id}`).expect(200)
+	})
+
+	it('should return a 200 status code and the data when the url is api/users/id method PUT', async () => {
+		await request(server).put(`/api/users/${user.id}`).send({
+			username: "Alex",
+			age: 30,
+			hobbes: [''],
+		}).expect(200, {
+			id: user.id,
+			username: "Alex",
+			age: 30,
+			hobbes: [''],
+		})
 	})
 
 });
