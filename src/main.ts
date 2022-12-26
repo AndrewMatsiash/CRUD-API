@@ -4,6 +4,7 @@ import { getReq } from './methods/get-request.js';
 import { users } from './data/users.js';
 import { postReq } from './methods/post-request.js';
 import { deleteReq } from './methods/delete-request.js';
+import { putReq } from './methods/put-request.js';
 dotenv.config()
 
 const PORT = process.env.PORT || 8000
@@ -17,7 +18,7 @@ export const server = http.createServer((req, res) => {
 			postReq(req, res, users)
 			break;
 		case 'PUT':
-			// putReq(req, res)
+			putReq(req, res,users)
 			break;
 		case 'DELETE':
 			deleteReq(req, res, users)
